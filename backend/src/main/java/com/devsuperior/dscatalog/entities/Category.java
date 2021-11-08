@@ -1,10 +1,15 @@
 package com.devsuperior.dscatalog.entities;
+import javax.persistence.*;
 import java.io.Serializable;//Converter o objeto em sequencia de bytes
 //ser gravados em arquivos, passado na rede.
 
+@Entity
+@Table(name="tb_category")//definir o nome da tabela do banco
 public class Category implements Serializable{
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//informa que o ID é auto incrementável
     private Long id;
     private String name;
 
