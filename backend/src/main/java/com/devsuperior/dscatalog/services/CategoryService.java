@@ -4,6 +4,7 @@ import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class CategoryService {
     @Autowired//o spring trata de injetar uma dependencia válida
     private CategoryRepository repository;//dependencia
 
+    @Transactional(readOnly = true)//evitar travar o bd, melhora a perfomance, executa em uma tranzação do bd
     public List<Category> findAll(){
         return repository.findAll();
     }

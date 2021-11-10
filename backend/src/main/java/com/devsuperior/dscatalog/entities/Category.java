@@ -1,4 +1,6 @@
 package com.devsuperior.dscatalog.entities;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.io.Serializable;//Converter o objeto em sequencia de bytes
 //ser gravados em arquivos, passado na rede.
