@@ -3,7 +3,6 @@ package com.devsuperior.dscatalog.resources;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
