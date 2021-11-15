@@ -3,11 +3,14 @@ package com.devsuperior.dscatalog.resources;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.devsuperior.dscatalog.dto.CategoryDTO;
 import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,12 +25,18 @@ public class CategoryResource{
     //criando END POINTS
     //encapsula uma resposta http
     @GetMapping
-    public ResponseEntity<List<Category>> findAll(){
+    public ResponseEntity<List<CategoryDTO>> findAll(){
         /*List<Category> list = new ArrayList<>();
         list.add(new Category(1L, "Books"));
         list.add(new Category(2L, "Electronics"));*/
-        List<Category> list = service.findAll();
+        List<CategoryDTO> list = service.findAll();
         return ResponseEntity.ok().body(list);//resposta 200
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<CategoryDTO> findById(@PathVariable Long id){
+            CategoryDTO dto = service.findById(id);
+        return ResponseEntity.ok().body(dto);//resposta 200
     }
 
 }
