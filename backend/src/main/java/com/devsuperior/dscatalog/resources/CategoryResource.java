@@ -1,6 +1,7 @@
 package com.devsuperior.dscatalog.resources;
 
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +10,8 @@ import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController//efetua um préprocessamento ao processar, e será disponibilizada como recurso
 @RequestMapping(value = "/categories")//rota do rest
@@ -39,4 +38,14 @@ public class CategoryResource{
         return ResponseEntity.ok().body(dto);//resposta 200
     }
 
+    //inserindo uma nova categoria no banco
+    @PostMapping
+    public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto){
+        dto = service.insert(dto);
+
+        //inserir o objeto respondendo o cabeçalho da resposta
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(dto);
+    }
 }
